@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  meat: 1
+  rice: false
+  salsa: false
+  guacamole: false
+  notes: MyText
+
+two:
+  meat: 1
+  rice: false
+  salsa: false
+  guacamole: false
+  notes: MyText
