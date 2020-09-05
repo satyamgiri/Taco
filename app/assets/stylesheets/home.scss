@@ -1,0 +1,120 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+$fa-font-path: '@fortawesome/fontawesome-free/webfonts';
+@import '@fortawesome/fontawesome-free/scss/fontawesome';
+@import '@fortawesome/fontawesome-free/scss/solid';
+@import '@fortawesome/fontawesome-free/scss/regular';
+@import '@fortawesome/fontawesome-free/scss/brands';
+@import '@fortawesome/fontawesome-free/scss/v4-shims';
+
+.main-heading h2 {
+  background-color: blue;
+  border-radius: 30px;
+  width: 30%;
+  text-align: center;
+  color: white;
+}
+
+.table th {
+  border-top: 0px!important;
+}
+.close-button {
+  padding: 0px 8px!important;
+}
+
+.order-col {
+  border-right: 1px solid blue;
+  background-color: blue;
+  color: white;padding: 20px;
+  border-radius: 28px 0px 0px 28px;
+}
+.taco-table {
+  height: 350px;
+  overflow: hidden!important;
+  overflow: auto!important;
+}
+
+
+.logo-image {
+  z-index: 1;
+}
+.logo-image img{
+  height: 7%;
+  width: 4%;
+  position: absolute;
+  margin: auto;
+  display: block;
+  top: 60px;
+  left: 0;
+  right: 0;
+  background-color: yellow;
+}
+
+
+
+.mr-5px {
+  margin-right: 5px!important;
+}
+.order-margin {
+  margin-bottom: 82px;
+}
+
+
+@media (max-width: 1125px) {
+  .main-heading h2 {
+    width: 38%;
+  }
+  .logo-image img {
+    height: 7%;
+    width: 5%;
+  }
+}
+
+@media (max-width: 992px) {
+  .main-heading h2 {
+    width: 50%;
+  }
+  .order-heading {
+    font-size: 1.25rem;
+  }
+  .taco-table {
+    height: 430px;
+  }
+  .order-margin {
+    margin-bottom: 0px;
+  }
+  .padding-left-15 {
+    padding-left: 15px!important;
+  }
+}
+
+@media (max-width: 767px) {
+  .main-heading h2 {
+    width: 80%;
+  }
+  .order-col {
+    border-radius: 28px 28px 0px 0px;
+  }
+  .logo-image img {
+    height: 9%;
+    width: 9%;
+    z-index: inherit;
+  }
+  .taco-table {
+    height: 400px;
+  }
+}
+
+@media (max-width: 500px) {
+  .main-heading h2 {
+    width: 100%;
+  }
+  .logo-image img {
+    height: 8%;
+    width: 12%;
+    z-index: inherit;
+  }
+}
+

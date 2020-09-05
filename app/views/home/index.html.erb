@@ -1,0 +1,232 @@
+
+
+<!--Heading Section-->
+
+<section class="container mt-3 mb-2">
+
+  <div class="d-flex">
+    <div class="col">
+
+      <div class="main-heading ">
+        <h2 class="py-2 mx-auto">UnboXt Taco Shop</h2>
+      </div>
+
+    </div>
+  </div>
+
+
+<!--  image row-->
+  <div class="logo-image">
+    <%= image_tag "logo.png", class: "img-fluid rounded-circle", style: "background-color: yellow;z-index: 100;" %>
+  </div>
+
+</section>
+
+
+<!--Main Section -->
+
+<section class="container mb-3"  ng-app="myApp">
+
+  <div class="" style="border: 2px solid blue;border-radius: 30px;">
+
+    <div class="row d-flex m-auto">
+
+      <!--        order area-->
+
+
+      <div class="col-12 col-sm-12 col-md-4 order-col">
+        <form ng-controller="FormCtrl" ng-submit="submitForm()">
+          <div class="row" style="">
+            <div class="col-12">
+              <h3 class="order-heading">Order a new Taco</h3>
+            </div>
+
+
+            <div class="col-12">
+              <hr style="background-color: white;height: 1px;">
+              <h5>Meat</h5>
+
+            </div>
+
+            <div class="col-6 col-sm-4 col-md-6 col-lg-4 pr-0 padding-left-15">
+              <input type="radio" id="chicken" name="meat" ng-model="form.meat" value="Chicken" class="mr-5px">
+              <label for="chicken">Chicken</label>
+            </div>
+            <div class="col-6 col-sm-4 col-md-6 col-lg-4 pl-0 padding-left-15">
+              <input type="radio" id="steak" name="meat" ng-model="form.meat"  value="Steak" class="mr-5px">
+              <label for="steak">Steak</label>
+            </div>
+            <div class="col-6 col-sm-4 col-md-6 col-lg-4 pl-0 padding-left-15 mb-md-3 mb-sm-4 mb-4">
+              <input type="radio" id="carnitas" name="meat" ng-model="form.meat"  value="Carnitas" class="mr-5px">
+              <label for="carnitas">Carnitas</label>
+            </div>
+
+
+            <div class="col-12">
+              <h5>Sides</h5>
+            </div>
+
+            <div class="col-6 col-sm-4 col-md-6 col-lg-4 pr-0 padding-left-15">
+              <input type="checkbox" id="rice" ng-model="form.rice" class="mr-5px">
+              <label for="rice">Rice</label>
+            </div>
+            <div class="col-6 col-sm-4 col-md-6 col-lg-4 col-lg-4 pr-0 pl-0 padding-left-15">
+              <input type="checkbox" id="salsa" ng-model="form.salsa" class="mr-5px">
+              <label for="salsa">Salsa</label>
+            </div>
+            <div class="col-6 col-sm-4 col-md-8 col-lg-4 col-lg-4 pr-0 pl-0 padding-left-15 mb-md-3 mb-sm-4 mb-4">
+              <input type="checkbox" id="guacamole" ng-model="form.guacamole" class="mr-5px">
+              <label for="guacamole">Guacamole</label>
+            </div>
+
+
+            <div class="col-12">
+              <h5>Notes</h5>
+            </div>
+
+            <div class="col-12">
+              <textarea rows="3" class="form-control" ng-model="form.notes"></textarea>
+            </div>
+
+            <div class="col-12 mt-3">
+              <button class="btn btn-primary mb-sm-4 mb-4" ngClick="Submit">Order Taco</button>
+            </div>
+
+          </div>
+        </form>
+      </div>
+
+
+
+      <!-- list area-->
+      <div class="col-12 col-sm-12 col-md-8 pl-4"  ng-controller="FormCtrl">
+
+        <div class="row d-flex mt-3">
+          <div class="col-12">
+            <h3>Taco Queue</h3>
+          </div>
+        </div>
+
+        <hr style="background-color: black;height: 1px;">
+
+
+        <div class="taco-table mb-2 mb-sm-2 mb-md-0">
+        <table class="table table-striped" style="white-space: nowrap;" id="taco_table" >
+          <thead>
+          <tr>
+            <th>Order #</th>
+            <th>Meat</th>
+            <th>Rice</th>
+            <th>Salsa</th>
+            <th>Guacamole</th>
+            <th>Notes</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="tacos in tacosArray">
+              <td>{{tacos.id}}</td>
+              <td>{{tacos.meat}}</td>
+              <td>{{tacos.rice}}</td>
+              <td>{{tacos.salsa}}</td>
+              <td>{{tacos.guacamole}}</td>
+              <td>{{tacos.notes}}</td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<script>
+  var app = angular.module('myApp', []);
+
+
+
+  app.controller('FormCtrl', function ($scope, $timeout, $http) {
+    // JSON ARRAY TO POPULATE TABLE.
+    $scope.tacosArray = [];
+
+    $scope.submitForm = function() {
+        $http({
+
+            url: "tacos",
+            data: {"taco": $scope.form},
+            method: 'POST',
+            headers : {'Content-Type':'application/json; charset=UTF-8'}
+
+        }).success(function(data){
+          var taco = [];
+          taco.id = data["id"];
+          taco.meat = data["meat"];
+          taco.rice = data["rice"];
+          taco.salsa = data["salsa"];
+          taco.guacamole = data["guacamole"];
+          taco.notes = data["notes"];
+          $scope.tacosArray.push(taco);
+          
+          
+        }).error(function(err){"ERR", console.log(err)})
+
+    };
+
+    
+    
+        $http({
+
+            url: "tacos",
+            method: 'GET',
+            headers : {'Content-Type':'application/json; charset=UTF-8'}
+
+        }).success(function(data){
+            angular.forEach(data, function (value) {
+            
+              var taco = [];
+              taco.id = value["id"];
+              taco.meat = value["meat"];
+              taco.rice = value["rice"];
+              taco.salsa = value["salsa"];
+              taco.guacamole = value["guacamole"];
+              taco.notes = value["notes"];
+
+              $scope.tacosArray.push(taco);
+            });
+        }).error(function(err){"ERR", console.log(err)})
+
+    // GET VALUES FROM INPUT BOXES AND ADD A NEW ROW TO THE TABLE.
+    $scope.addRow = function () {
+        $http({
+
+            url: "tacos",
+            method: 'GET',
+            headers : {'Content-Type':'application/json; charset=UTF-8'}
+
+        }).success(function(data){
+          
+            var taco = [];
+            taco.id = data["id"];
+            taco.meat = data["meat"];
+            taco.rice = data["rice"];
+            taco.salsa = data["salsa"];
+            taco.guacamole = data["guacamole"];
+            taco.notes = data["notes"];
+
+            $scope.tacosArray.push(taco);
+          
+        }).error(function(err){"ERR", console.log(err)})
+
+        
+    };
+
+    
+  });
+</script>
