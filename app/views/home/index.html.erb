@@ -150,14 +150,14 @@
 
 
 <script>
+  // Defining angular application
   var app = angular.module('myApp', []);
-
-
 
   app.controller('FormCtrl', function ($scope, $timeout, $http) {
     // JSON ARRAY TO POPULATE TABLE.
     $scope.tacosArray = [];
 
+    // Function to submit form through POST API
     $scope.submitForm = function() {
         $http({
 
@@ -183,27 +183,27 @@
     };
 
     
-    
-        $http({
+    // Function to get tacos from the database.
+    $http({
 
-            url: "tacos",
-            method: 'GET',
-            headers : {'Content-Type':'application/json; charset=UTF-8'}
+        url: "tacos",
+        method: 'GET',
+        headers : {'Content-Type':'application/json; charset=UTF-8'}
 
-        }).success(function(data){
-            angular.forEach(data, function (value) {
-            
-              var taco = [];
-              taco.id = value["id"];
-              taco.meat = value["meat"];
-              taco.rice = value["rice"];
-              taco.salsa = value["salsa"];
-              taco.guacamole = value["guacamole"];
-              taco.notes = value["notes"];
+    }).success(function(data){
+        angular.forEach(data, function (value) {
+        
+          var taco = [];
+          taco.id = value["id"];
+          taco.meat = value["meat"];
+          taco.rice = value["rice"];
+          taco.salsa = value["salsa"];
+          taco.guacamole = value["guacamole"];
+          taco.notes = value["notes"];
 
-              $scope.tacosArray.push(taco);
-            });
-        }).error(function(err){"ERR", console.log(err)})
+          $scope.tacosArray.push(taco);
+        });
+    }).error(function(err){"ERR", console.log(err)})
 
     // GET VALUES FROM INPUT BOXES AND ADD A NEW ROW TO THE TABLE.
     $scope.addRow = function () {
@@ -229,6 +229,8 @@
 
         
     };
+
+    // Function to delete row from the table.
 
     $scope.deleteRow = function(i, id) {
       $http({
